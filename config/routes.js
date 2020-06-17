@@ -25,7 +25,9 @@ module.exports.routes = {
   '/app/*': { view: 'pages/angularRoot' },
 
   'GET /api/auth/gmail': 'GmailController.authenticate',
-  'GET /api/auth/callback': 'GmailController.authenticateCallback'
+  'GET /api/auth/callback': 'GmailController.authenticateCallback',
+
+  'GET /api/gmail/labels': 'GmailController.requestLabels',
 
   /***************************************************************************
   *                                                                          *

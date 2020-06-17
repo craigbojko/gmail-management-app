@@ -4,3 +4,13 @@
     <!-- <p>If not, click <a href="javascript:()">here</a></p> -->
   </div>
 </div>
+<script type="text/javascript">
+  (function () {
+    try {
+      const jwt = '<%= jwt %>' || ''
+      window.localStorage.setItem('jwt', jwt)
+    } catch (e) {
+
+    }
+  })()
+</script>

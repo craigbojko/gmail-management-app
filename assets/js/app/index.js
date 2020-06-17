@@ -27,7 +27,7 @@ angular
         redirectTo: '/'
       })
   })
-  .service('gmailService', function ($rootScope, $http, $location, $interval) {
+  .service('gmailService', function ($rootScope, $http, $timeout, $interval) {
     this.authenticate = () => {
       var req = {
         method: 'GET',
@@ -36,8 +36,9 @@ angular
 
       $http(req).then((response) => {
         this.openLoginWindow(response.data.authUrl)
+        $rootScope.$emit('state_update', { type: 'auth', status: 'in_progress' })
       }, (error) => {
-        console.error(error)
+        $rootScope.$emit('state_update', { type: 'auth', status: 'failed', error })
       })
     }
 
@@ -59,10 +60,11 @@ angular
           const url = authWindow.document.URL
           if (url.indexOf('/api/auth/callback') !== -1) {
             $interval.cancel(callbackCheck)
-            authWindow.close()
+            $timeout(authWindow.close, 1000)
+            $rootScope.$emit('state_update', { type: 'auth', status: 'success' })
           }
-        } catch (e) {
-          // nothing
+        } catch (error) {
+          $rootScope.$emit('state_update', { type: 'auth', status: 'failed', error })
         }
       }, 500)
     }
@@ -79,17 +81,4 @@ angular
         console.error(error)
       })
     }
-
-    // this.decodeJWT = () => {
-    //   let decodedToken
-    //   try {
-    //     const verifiedToken = jwt.verify(token, 'ssssshhhhhh')
-    //     if (verifiedToken) {
-    //       decodedToken = jwt.decode(token, { complete: true })
-    //       console.log('Decoded JWT:', decodedToken)
-    //     }
-    //   } catch (jwtError) {
-    //     throw new Error(`Invalid JWT token: ${token}`)
-    //   }
-    // }
   })
