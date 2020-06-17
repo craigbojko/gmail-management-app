@@ -13,6 +13,28 @@
  */
 
 angular.module('app')
-  .controller('Controller1', function ($scope) {
+  .controller('Controller1', function (
+    $scope,
+    $rootScope,
+    $http,
+    $cookies,
+    $interval,
+    gmailService
+  ) {
     $scope.products = ['Milk', 'Bread', 'Cheese', 'Other']
+    $scope.isLoggedInGmail = false
+    $scope.isLoading = false
+
+    $rootScope.$on('loadingGmailAuth', () => {
+      $scope.isLoading = true
+    })
+
+    var gmailJWTCookie = null
+    const cookieCheckInterval = $interval(() => {
+      gmailJWTCookie = $cookies.get('gmail_jwt')
+      $scope.isLoggedInGmail = gmailJWTCookie
+      $scope.isLoading = false
+    }, 1000)
+
+    $scope.login = () => gmailService.authenticate()
   })

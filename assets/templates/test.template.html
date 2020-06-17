@@ -2,4 +2,14 @@
   <ul>
     <li ng-repeat="x in products">{{x}}</li>
   </ul>
+
+  <div ng-if="!isLoggedInGmail">
+    <button ng-click="login()">GMail Login</button>
+  </div>
+  <div ng-if="isLoggedInGmail">
+    <span>GMAIL OK</span>
+  </div>
+  <div ng-if="isLoading">
+    <span>Loading...</span>
+  </div>
 </div>

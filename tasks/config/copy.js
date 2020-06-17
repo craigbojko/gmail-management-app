@@ -42,7 +42,8 @@ module.exports = function (grunt) {
         cwd: './node_modules',
         src: [
           'angular/angular.min.js',
-          'angular-route/angular-route.min.js'
+          'angular-route/angular-route.min.js',
+          'angular-cookies/angular-cookies.min.js'
         ],
         dest: '.tmp/public/dependencies'
       }]

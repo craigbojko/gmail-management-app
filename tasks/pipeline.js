@@ -67,6 +67,7 @@ var jsFilesToInject = [
   // AngularJS ordering
   'dependencies/angular/angular.min.js',
   'dependencies/angular-route/angular-route.min.js',
+  'dependencies/angular-cookies/angular-cookies.min.js',
 
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
