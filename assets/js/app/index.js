@@ -20,8 +20,8 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/templates/test.template.html',
-        controller: 'Controller1'
+        templateUrl: '/templates/main.html',
+        controller: 'Main'
       })
       .otherwise({
         redirectTo: '/'
@@ -80,5 +80,25 @@ angular
       }, (error) => {
         console.error(error)
       })
+    }
+
+    this.fetchLabels = async () => {
+      const jwt = window.localStorage.getItem('jwt')
+      var req = {
+        method: 'GET',
+        url: '/api/gmail/labels',
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      }
+
+      try {
+        const response = await $http(req)
+        $rootScope.$emit('fetch_labels', { type: 'fetch', status: 'in_progress', payload: response })
+        return response.data
+      } catch (error) {
+        $rootScope.$emit('fetch_labels', { type: 'fetch', status: 'failed', error })
+        throw new Error(error.message || error)
+      }
     }
   })

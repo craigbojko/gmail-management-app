@@ -13,17 +13,16 @@
  */
 
 angular.module('app')
-  .controller('Controller1', function (
+  .controller('Main', function (
     $scope,
     $rootScope,
-    $http,
     $cookies,
     $interval,
     gmailService
   ) {
-    $scope.products = ['Milk', 'Bread', 'Cheese', 'Other']
     $scope.isLoggedInGmail = false
     $scope.isLoading = false
+    $scope.labels = []
 
     $rootScope.$on('loadingGmailAuth', () => {
       $scope.isLoading = true
@@ -37,4 +36,7 @@ angular.module('app')
     }, 1000)
 
     $scope.login = () => gmailService.authenticate()
+    $scope.loadLabels = () => gmailService.fetchLabels().then(response => {
+      $scope.labels = response.data
+    })
   })
