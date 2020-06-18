@@ -1,19 +1,46 @@
-<nav>
-  <div ng-if="!isLoggedInGmail">
-    <button ng-click="login()">GMail Login</button>
-  </div>
-  <div ng-if="isLoggedInGmail">
-    <span>GMAIL OK</span>
-  </div>
+<md-content>
+  <md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+      <!-- <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+        <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+      </md-button> -->
+
+      <h2 flex md-truncate>GMail Management</h2>
+
+      <md-button
+        class="md-raised md-primary"
+        aria-label="GMail Login"
+        ng-if="!isLoggedInGmail"
+        ng-click="login()"
+      >
+        <!-- <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon> -->
+        GMail Login
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <nav class="">
+    <md-nav-bar
+      md-no-ink-bar="disableInkBar"
+      md-selected-nav-item="currentNavItem"
+      nav-bar-aria-label="navigation links"
+    >
+      <md-nav-item md-nav-href="#labels" name="GMail Labels">Labels</md-nav-item>
+      <md-nav-item md-nav-sref="#filters" name="GMail Filters">Filters</md-nav-item>
+      <!-- <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+        Page Six
+      </md-nav-item> -->
+    </md-nav-bar>
+    <md-progress-linear ng-if="isLoading" md-mode="indeterminate" class="md-accent"></md-progress-linear>
+  </nav>
+
+  <main ng-controller="Main">
+    <md-button class="md-raised md-secondary" ng-click="loadLabels()">Labels</md-button>
+    <article>
+      <ul>
+        <li ng-repeat="x in labels">{{x.name}}</li>
+      </ul>
+    </article>
+  </main>
+
 </nav>
-<main ng-controller="Main">
-  <div ng-if="isLoading">
-    <span>Loading...</span>
-  </div>
-  <button ng-click="loadLabels()">Labels</button>
-  <article>
-    <ul>
-      <li ng-repeat="x in labels">{{x.name}}</li>
-    </ul>
-  </article>
-</main>

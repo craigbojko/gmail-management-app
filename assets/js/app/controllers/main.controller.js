@@ -16,27 +16,22 @@ angular.module('app')
   .controller('Main', function (
     $scope,
     $rootScope,
-    $cookies,
-    $interval,
     gmailService
   ) {
     $scope.isLoggedInGmail = false
     $scope.isLoading = false
     $scope.labels = []
 
-    $rootScope.$on('loadingGmailAuth', () => {
-      $scope.isLoading = true
+    $rootScope.$on('event:fetch', (event, { status }) => {
+      $scope.isLoading = status !== 'done'
     })
-
-    var gmailJWTCookie = null
-    const cookieCheckInterval = $interval(() => {
-      gmailJWTCookie = $cookies.get('gmail_jwt')
-      $scope.isLoggedInGmail = gmailJWTCookie
-      $scope.isLoading = false
-    }, 1000)
 
     $scope.login = () => gmailService.authenticate()
-    $scope.loadLabels = () => gmailService.fetchLabels().then(response => {
-      $scope.labels = response.data
-    })
+
+    $scope.loadLabels = () => {
+      gmailService.fetchLabels().then(response => {
+        $scope.labels = response.data
+        $scope.$apply()
+      })
+    }
   })

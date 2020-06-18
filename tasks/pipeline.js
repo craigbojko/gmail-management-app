@@ -36,6 +36,8 @@ var cssFilesToInject = [
   // Bring in `.css` files for themes and style guides (e.g. Bootstrap, Foundation)
   'dependencies/**/*.css',
 
+  'dependencies/angular-material/angular-material.min.css',
+
   // All of the rest of your custom `.css` files will be injected here,
   // in no particular order.  To customize the ordering, add additional
   // items here, _above_ this one.
@@ -68,6 +70,10 @@ var jsFilesToInject = [
   'dependencies/angular/angular.min.js',
   'dependencies/angular-route/angular-route.min.js',
   'dependencies/angular-cookies/angular-cookies.min.js',
+  'dependencies/angular-aria/angular-aria.min.js',
+  'dependencies/angular-animate/angular-animate.min.js',
+  'dependencies/angular-messages/angular-messages.min.js',
+  'dependencies/angular-material/angular-material.min.js',
 
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)

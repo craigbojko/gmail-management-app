@@ -15,10 +15,20 @@
 angular
   .module('app', [
     'ngRoute',
-    'ngCookies'
+    'ngCookies',
+    'ngMessages',
+    'ngMaterial'
   ])
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/labels', {
+        templateUrl: '/templates/main.html',
+        controller: 'Main'
+      })
+      .when('/filters', {
+        templateUrl: '/templates/main.html',
+        controller: 'Main'
+      })
       .when('/', {
         templateUrl: '/templates/main.html',
         controller: 'Main'
@@ -93,11 +103,12 @@ angular
       }
 
       try {
+        $rootScope.$emit('event:fetch', { type: 'labels', status: 'in_progress' })
         const response = await $http(req)
-        $rootScope.$emit('fetch_labels', { type: 'fetch', status: 'in_progress', payload: response })
+        $rootScope.$emit('event:fetch', { type: 'labels', status: 'done', payload: response })
         return response.data
       } catch (error) {
-        $rootScope.$emit('fetch_labels', { type: 'fetch', status: 'failed', error })
+        $rootScope.$emit('event:fetch', { type: 'labels', status: 'failed', error })
         throw new Error(error.message || error)
       }
     }

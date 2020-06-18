@@ -43,7 +43,12 @@ module.exports = function (grunt) {
         src: [
           'angular/angular.min.js',
           'angular-route/angular-route.min.js',
-          'angular-cookies/angular-cookies.min.js'
+          'angular-cookies/angular-cookies.min.js',
+          'angular-aria/angular-aria.min.js',
+          'angular-animate/angular-animate.min.js',
+          'angular-messages/angular-messages.min.js',
+          'angular-material/angular-material.min.css',
+          'angular-material/angular-material.min.js'
         ],
         dest: '.tmp/public/dependencies'
       }]
