@@ -29,7 +29,6 @@ module.exports.sockets = {
 
   // transports: [ 'websocket' ],
 
-
   /***************************************************************************
   *                                                                          *
   * `beforeConnect`                                                          *
@@ -42,14 +41,11 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // beforeConnect: function(handshake, proceed) {
-  //
-  //   // `true` allows the socket to connect.
-  //   // (`false` would reject the connection)
-  //   return proceed(undefined, true);
-  //
-  // },
-
+  beforeConnect: function (handshake, proceed) {
+    // `true` allows the socket to connect.
+    // (`false` would reject the connection)
+    return proceed(undefined, true)
+  }
 
   /***************************************************************************
   *                                                                          *
@@ -68,7 +64,6 @@ module.exports.sockets = {
   //
   // },
 
-
   /***************************************************************************
   *                                                                          *
   * Whether to expose a 'GET /__getcookie' route that sets an HTTP-only      *
@@ -78,5 +73,4 @@ module.exports.sockets = {
 
   // grant3rdPartyCookie: true,
 
-
-};
+}

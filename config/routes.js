@@ -22,7 +22,7 @@ module.exports.routes = {
   '/': '/app',
   '/app': { view: 'pages/angularRoot' },
   '/app/callback': { view: 'pages/angularRoot' },
-  '/app/*': { view: 'pages/angularRoot' },
+  '/app/*': { view: 'pages/angularRoot', skipAssets: true },
 
   'GET /api/auth/gmail': 'GmailController.authenticate',
   'GET /api/auth/callback': 'GmailController.authenticateCallback',

@@ -13,7 +13,7 @@
  */
 
 angular.module('app')
-  .controller('Main', function (
+  .controller('Main', ['$scope', '$rootScope', 'gmailService', function (
     $scope,
     $rootScope,
     gmailService
@@ -34,4 +34,4 @@ angular.module('app')
         $scope.$apply()
       })
     }
-  })
+  }])

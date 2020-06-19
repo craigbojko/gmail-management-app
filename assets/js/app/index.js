@@ -19,7 +19,7 @@ angular
     'ngMessages',
     'ngMaterial'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/labels', {
         templateUrl: '/templates/main.html',
@@ -36,8 +36,8 @@ angular
       .otherwise({
         redirectTo: '/'
       })
-  })
-  .service('gmailService', function ($rootScope, $http, $timeout, $interval) {
+  }])
+  .service('gmailService', ['$rootScope', '$http', '$timeout', '$interval', function ($rootScope, $http, $timeout, $interval) {
     this.authenticate = () => {
       var req = {
         method: 'GET',
@@ -112,4 +112,4 @@ angular
         throw new Error(error.message || error)
       }
     }
-  })
+  }])
