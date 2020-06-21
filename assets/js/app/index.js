@@ -19,22 +19,22 @@ angular
     'ngMessages',
     'ngMaterial'
   ])
+  .component('headerNav', {
+    templateUrl: 'templates/header.html',
+    controller: 'headerNavController'
+  })
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/labels', {
-        templateUrl: '/templates/main.html',
-        controller: 'Main'
+        templateUrl: '/templates/labels.html',
+        controller: 'labelsController'
       })
-      .when('/filters', {
-        templateUrl: '/templates/main.html',
-        controller: 'Main'
-      })
-      .when('/', {
-        templateUrl: '/templates/main.html',
-        controller: 'Main'
-      })
+      // .when('/filters', {
+      //   templateUrl: '/templates/main.html',
+      //   controller: 'Main'
+      // })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/labels'
       })
   }])
   .service('gmailService', ['$rootScope', '$http', '$timeout', '$interval', function ($rootScope, $http, $timeout, $interval) {

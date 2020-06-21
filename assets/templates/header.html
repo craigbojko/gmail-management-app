@@ -1,4 +1,4 @@
-<md-content>
+<div>
   <md-toolbar class="md-hue-1">
     <div class="md-toolbar-tools">
       <!-- <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
@@ -33,14 +33,4 @@
     </md-nav-bar>
     <md-progress-linear ng-if="isLoading" md-mode="indeterminate" class="md-accent"></md-progress-linear>
   </nav>
-
-  <main ng-controller="Main">
-    <md-button class="md-raised md-secondary" ng-click="loadLabels()">Labels</md-button>
-    <article>
-      <ul>
-        <li ng-repeat="x in labels">{{x.name}}</li>
-      </ul>
-    </article>
-  </main>
-
-</nav>
+</div>

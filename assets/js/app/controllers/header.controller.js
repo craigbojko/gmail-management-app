@@ -13,25 +13,17 @@
  */
 
 angular.module('app')
-  .controller('Main', ['$scope', '$rootScope', 'gmailService', function (
+  .controller('headerNavController', ['$scope', '$rootScope', 'gmailService', function (
     $scope,
     $rootScope,
     gmailService
   ) {
     $scope.isLoggedInGmail = false
     $scope.isLoading = false
-    $scope.labels = []
 
     $rootScope.$on('event:fetch', (event, { status }) => {
       $scope.isLoading = status !== 'done'
     })
 
     $scope.login = () => gmailService.authenticate()
-
-    $scope.loadLabels = () => {
-      gmailService.fetchLabels().then(response => {
-        $scope.labels = response.data
-        $scope.$apply()
-      })
-    }
   }])
