@@ -7,30 +7,37 @@
 
       <h2 flex md-truncate>GMail Management</h2>
 
-      <md-button
+      <!-- <md-button
         class="md-raised md-primary"
         aria-label="GMail Login"
         ng-if="!isLoggedInGmail"
         ng-click="login()"
       >
-        <!-- <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon> -->
         GMail Login
+      </md-button> -->
+
+      <md-button
+        class=""
+        aria-label="Logout"
+        ng-if="isLoggedIn()"
+        ng-click="logout()"
+      >
+        Logout
       </md-button>
     </div>
   </md-toolbar>
-
-  <nav class="">
+  <md-progress-linear ng-if="isLoading" md-mode="indeterminate" class="md-accent"></md-progress-linear>
+  <nav ng-if="isLoggedIn()">
     <md-nav-bar
       md-no-ink-bar="disableInkBar"
       md-selected-nav-item="currentNavItem"
       nav-bar-aria-label="navigation links"
     >
-      <md-nav-item md-nav-href="#labels" name="GMail Labels">Labels</md-nav-item>
-      <md-nav-item md-nav-sref="#filters" name="GMail Filters">Filters</md-nav-item>
+      <md-nav-item md-nav-href="#!/labels" name="labels">Labels</md-nav-item>
+      <md-nav-item md-nav-href="#!/filters" name="filters">Filters</md-nav-item>
       <!-- <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
         Page Six
       </md-nav-item> -->
     </md-nav-bar>
-    <md-progress-linear ng-if="isLoading" md-mode="indeterminate" class="md-accent"></md-progress-linear>
   </nav>
 </div>

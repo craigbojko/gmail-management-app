@@ -13,17 +13,15 @@
  */
 
 angular.module('app')
-  .controller('headerNavController', ['$scope', '$rootScope', 'gmailService', function (
-    $scope,
-    $rootScope,
-    gmailService
-  ) {
-    $scope.isLoggedInGmail = false
+  .controller('headerNavController', ['$scope', '$rootScope', '$location', 'authService', function ($scope, $rootScope, $location, authService) {
     $scope.isLoading = false
+    $scope.currentNavItem = $location.$$path.substring(1)
 
     $rootScope.$on('event:fetch', (event, { status }) => {
       $scope.isLoading = status !== 'done'
     })
 
-    $scope.login = () => gmailService.authenticate()
+    $scope.logout = () => $rootScope.$emit('logout')
+
+    $scope.isLoggedIn = () => authService.isLoggedIn()
   }])
