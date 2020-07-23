@@ -48,7 +48,9 @@ module.exports = function (grunt) {
           'angular-animate/angular-animate.min.js',
           'angular-messages/angular-messages.min.js',
           'angular-material/angular-material.min.css',
-          'angular-material/angular-material.min.js'
+          'angular-material/angular-material.min.js',
+          'angular-material-data-table/dist/md-data-table.min.css',
+          'angular-material-data-table/dist/md-data-table.min.js'
         ],
         dest: '.tmp/public/dependencies'
       }]

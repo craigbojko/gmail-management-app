@@ -17,7 +17,8 @@ angular
     'ngRoute',
     'ngCookies',
     'ngMessages',
-    'ngMaterial'
+    'ngMaterial',
+    'md.data.table'
   ])
   .component('headerNav', {
     templateUrl: 'templates/header.html',
@@ -125,8 +126,6 @@ function run ($rootScope, $location, $cookies, $http, authService) {
   authService.setup()
 
   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-    console.log('REDIRECTION IN RUN: ', next, current)
-
     // redirect to login page if not logged in and trying to access a restricted page
     var restrictedPage = true;
     ['/login', '/register'].forEach((page) => {
@@ -135,7 +134,6 @@ function run ($rootScope, $location, $cookies, $http, authService) {
       }
     })
 
-    // var loggedIn = $rootScope.globals.currentUser
     if (restrictedPage && !authService.isLoggedIn()) {
       $location.path('/login')
     }

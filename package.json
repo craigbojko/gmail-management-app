@@ -13,6 +13,7 @@
     "angular-aria": "^1.8.0",
     "angular-cookies": "^1.8.0",
     "angular-material": "^1.1.22",
+    "angular-material-data-table": "^0.10.10",
     "angular-messages": "^1.8.0",
     "angular-route": "^1.8.0",
     "googleapis": "^52.1.0",
