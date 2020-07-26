@@ -13,9 +13,14 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           record: true
+          parallel: false
           config-file: cypress.json
+          group: 'Github CI: Pull Request'
+          ci-build-id: '${{ github.workflow }}-${{ github.event_name }}-${{ github.sha }}'
+
           start: npm run-script start:ci
           wait-on: "http://localhost:1337"
+
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_TOKEN }}
