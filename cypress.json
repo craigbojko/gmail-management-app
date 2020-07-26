@@ -1,0 +1,13 @@
+{
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "projectId": "paz3y8",
+  "baseUrl": "http://localhost:1337",
+  "pluginsFile": "test/cypress/plugins/index.js",
+  "supportFile": "test/cypress/support/index.js",
+  "fixturesFolder": "test/cypress/fixtures",
+  "integrationFolder": "test/cypress/integration",
+  "screenshotsFolder": "test/cypress/screenshots",
+  "videosFolder": "test/cypress/videos",
+  "testFiles": "**/*.spec.*",
+  "ignoreTestFiles": "*.hot-update.js"
+}
