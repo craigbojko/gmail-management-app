@@ -1,7 +1,13 @@
-<div ng-app="app" class="default-page">
+<div>
   <!-- <div class="header">
     <h1 id="main-title" class="container"><%= __('A brand new app.') %></h1>
     <h3 class="container">You're looking at: <code><%= view.pathFromApp + '.' +view.ext %></code></h3>
   </div> -->
-  <div ng-view></div>
+
+  <md-content ng-app="app" class="default-page">
+    <header-nav></header-nav>
+    <main>
+      <article ng-view></article>
+    </main>
+  </md-content>
 </div>

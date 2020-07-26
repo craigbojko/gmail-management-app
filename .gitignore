@@ -132,3 +132,7 @@ lib-cov
 *.out
 *.pid
 
+# ignore cypress example files
+test/cypress/integration/examples/
+# ignore cypress video files
+test/cypress/videos/

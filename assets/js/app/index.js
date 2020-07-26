@@ -17,24 +17,34 @@ angular
     'ngRoute',
     'ngCookies',
     'ngMessages',
-    'ngMaterial'
+    'ngMaterial',
+    'md.data.table'
   ])
+  .component('headerNav', {
+    templateUrl: 'templates/header.html',
+    controller: 'headerNavController'
+  })
+  .component('labelsComponent', {
+    templateUrl: '/templates/labels.html',
+    controller: 'labelsController'
+  })
+  .component('filtersComponent', {
+    // templateUrl: '/templates/filters.html',
+    // controller: 'Main'
+    template: '<p>Filters View</p>',
+    controller: function () {}
+  })
+  .component('authenticationComponent', {
+    templateUrl: '/templates/login.html',
+    controller: 'authenticationController'
+  })
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-      .when('/labels', {
-        templateUrl: '/templates/main.html',
-        controller: 'Main'
-      })
-      .when('/filters', {
-        templateUrl: '/templates/main.html',
-        controller: 'Main'
-      })
-      .when('/', {
-        templateUrl: '/templates/main.html',
-        controller: 'Main'
-      })
+      .when('/login', { template: '<authentication-component></authentication-component>' })
+      .when('/labels', { template: '<labels-component></labels-component>' })
+      .when('/filters', { template: '<filters-component></filters-component>' })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/labels'
       })
   }])
   .service('gmailService', ['$rootScope', '$http', '$timeout', '$interval', function ($rootScope, $http, $timeout, $interval) {
@@ -46,9 +56,9 @@ angular
 
       $http(req).then((response) => {
         this.openLoginWindow(response.data.authUrl)
-        $rootScope.$emit('state_update', { type: 'auth', status: 'in_progress' })
+        $rootScope.$emit('state:update', { type: 'auth', status: 'in_progress' })
       }, (error) => {
-        $rootScope.$emit('state_update', { type: 'auth', status: 'failed', error })
+        $rootScope.$emit('state:update', { type: 'auth', status: 'failed', error })
       })
     }
 
@@ -71,10 +81,10 @@ angular
           if (url.indexOf('/api/auth/callback') !== -1) {
             $interval.cancel(callbackCheck)
             $timeout(authWindow.close, 1000)
-            $rootScope.$emit('state_update', { type: 'auth', status: 'success' })
+            $rootScope.$emit('state:update', { type: 'auth', status: 'success' })
           }
         } catch (error) {
-          $rootScope.$emit('state_update', { type: 'auth', status: 'failed', error })
+          $rootScope.$emit('state:update', { type: 'auth', status: 'failed', error })
         }
       }, 500)
     }
@@ -93,13 +103,9 @@ angular
     }
 
     this.fetchLabels = async () => {
-      const jwt = window.localStorage.getItem('jwt')
       var req = {
         method: 'GET',
-        url: '/api/gmail/labels',
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
+        url: '/api/gmail/labels'
       }
 
       try {
@@ -113,3 +119,24 @@ angular
       }
     }
   }])
+  .run(run)
+
+run.$inject = ['$rootScope', '$location', '$cookies', '$http', 'authService']
+function run ($rootScope, $location, $cookies, $http, authService) {
+  authService.setup()
+
+  $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    // redirect to login page if not logged in and trying to access a restricted page
+    var restrictedPage = true;
+    ['/login', '/register'].forEach((page) => {
+      if (page === $location.path()) {
+        restrictedPage = false
+      }
+    })
+
+    if (restrictedPage && !authService.isLoggedIn()) {
+      $location.path('/login')
+    }
+  })
+}
+
