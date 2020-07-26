@@ -14,5 +14,5 @@ jobs:
         with:
           record: true
           config-file: cypress.json
-          start: npm start:ci
+          start: npm run-script start:ci
           wait-on: "http://localhost:1337"
