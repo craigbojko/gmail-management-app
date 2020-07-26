@@ -1,0 +1,13 @@
+name: Cypress Integration Tests on PR
+
+on: [pull_request]
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cypress.io
+        uses: cypress-io/github-action@v1.16.1
+        with:
+          record: true
+          config-file: cypress.json
