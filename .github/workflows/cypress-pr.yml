@@ -1,4 +1,4 @@
-name: Cypress Integration Tests on PR
+name: Cypress - Integration Tests PR
 
 on: [pull_request]
 
@@ -10,7 +10,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cypress.io
-        uses: cypress-io/github-action@v1.16.1
+        uses: cypress-io/github-action@v2
         with:
           record: true
           config-file: cypress.json
+          start: npm start
+          wait-on: "http://localhost:1337"
