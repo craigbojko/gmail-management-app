@@ -16,3 +16,6 @@ jobs:
           config-file: cypress.json
           start: npm run-script start:ci
           wait-on: "http://localhost:1337"
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_TOKEN }}
