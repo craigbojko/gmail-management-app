@@ -37,6 +37,7 @@ var cssFilesToInject = [
   'dependencies/**/*.css',
 
   'dependencies/angular-material/angular-material.min.css',
+  'dependencies/angular-material-data-table/dist/md-data-table.min.css',
 
   // All of the rest of your custom `.css` files will be injected here,
   // in no particular order.  To customize the ordering, add additional
@@ -74,6 +75,7 @@ var jsFilesToInject = [
   'dependencies/angular-animate/angular-animate.min.js',
   'dependencies/angular-messages/angular-messages.min.js',
   'dependencies/angular-material/angular-material.min.js',
+  'dependencies/angular-material-data-table/dist/md-data-table.min.js',
 
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)

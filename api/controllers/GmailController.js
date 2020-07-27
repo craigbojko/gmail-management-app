@@ -45,13 +45,13 @@ module.exports = {
       data: tokens
     }, JWT_SECRET)
 
-    // res.cookie('gmail_jwt', jwToken, {
-    //   expires: new Date(Date.now() + 3600000),
-    //   // domain: '.example.com',
-    //   path: '/',
-    //   secure: false,
-    //   httpOnly: false
-    // })
+    res.cookie('jwt', jwToken, {
+      expires: new Date(Date.now() + 3600000),
+      // domain: '.example.com',
+      path: '/',
+      secure: false,
+      httpOnly: false
+    })
 
     return res.view('pages/authCallback', {
       jwt: jwToken

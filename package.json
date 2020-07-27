@@ -13,8 +13,10 @@
     "angular-aria": "^1.8.0",
     "angular-cookies": "^1.8.0",
     "angular-material": "^1.1.22",
+    "angular-material-data-table": "^0.10.10",
     "angular-messages": "^1.8.0",
     "angular-route": "^1.8.0",
+    "cypress": "^4.11.0",
     "googleapis": "^52.1.0",
     "grunt": "1.0.4",
     "jsonwebtoken": "^8.5.1",
@@ -25,6 +27,7 @@
     "sails-hook-sockets": "^2.0.0"
   },
   "devDependencies": {
+    "@types/cypress": "^1.1.3",
     "eslint": "5.16.0"
   },
   "scripts": {
@@ -45,7 +48,18 @@
   },
   "standard": {
     "globals": [
-      "angular"
+      "angular",
+      "Cypress",
+      "cy",
+      "context",
+      "describe",
+      "it",
+      "expect",
+      "assert",
+      "beforeEach",
+      "afterEach",
+      "beforeAll",
+      "afterAll"
     ]
   }
 }

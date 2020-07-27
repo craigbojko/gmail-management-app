@@ -1,0 +1,56 @@
+<!-- <label-list labels={{labelSection}} /> -->
+
+<md-table-container>
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+    <thead md-head md-order="asc"> <!-- md-on-reorder="getDesserts"> -->
+      <tr md-row>
+        <th md-column><span></span></th>
+        <th md-column md-order-by="nameToLower"><span>Label</span></th>
+        <!-- <th md-column md-numeric md-order-by="calories.value"><span>Calories</span></th> -->
+        <th md-column>Type</th>
+        <th md-column>ID</th>
+        <th md-column>Label List Visible</th>
+        <th md-column>Msg. List Visible</th>
+        <th md-column>Colour</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr
+        ng-repeat="label in labels"
+        ng-if="!label.collapsed"
+        md-row
+        md-auto-select
+        md-select="label"
+        md-select-id="name"
+        ng-class="getTableRowClass(label)"
+      >
+        <td md-cell class="expand-column" ng-if="label.hasChildren != 0" ng-click="toggleCollapse(label)">&rarr;</td>
+        <td md-cell class="expand-column" ng-if="label.hasChildren == 0"></td>
+        <td md-cell class="name-column">{{label.name}}</td>
+        <td md-cell>{{label.type}}</td>
+        <td md-cell>{{label.id}}</td>
+        <td md-cell>{{label.labelListVisibility}}</td>
+        <td md-cell>{{label.messageListVisibility}}</td>
+        <td md-cell
+          style="text-align: center;"
+          ng-style="{
+            color: label.color.textColor,
+            'background-color': label.color.backgroundColor
+          }"
+        >
+          {{label.color.textColor}} : {{label.color.backgroundColor}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+<!-- <md-table-pagination
+  md-limit="query.limit"
+  md-limit-options="[5, 10, 15]"
+  md-page="query.page"
+  md-total="{{labels.length}}"
+  md-on-paginate="getDesserts"
+  md-page-select>
+</md-table-pagination> -->
+
