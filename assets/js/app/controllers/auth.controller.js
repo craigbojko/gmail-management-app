@@ -12,51 +12,65 @@
  * ------------------------------------
  */
 
-angular.module('app')
-  .controller('authenticationController', ['$scope', '$location', 'gmailService', function ($scope, $location, gmailService) {
-    $scope.init = () => {
-      $location.path('/labels')
-    }
-
-    $scope.login = () => gmailService.authenticate()
-
-    $scope.init()
-  }])
-  .service('authService', ['$rootScope', '$window', '$cookies', '$http', function ($rootScope, $window, $cookies, $http) {
-    let loggedIn = false
-    let jwt
-
-    this.setup = () => {
-      $rootScope.globals = $rootScope.globals || {}
-      $rootScope.globals.jwt = $cookies.get('jwt')
-
-      // Set jwt in global if available
-      if ($rootScope.globals.jwt) {
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.jwt
-        this.setCredentials($rootScope.globals.jwt)
+angular
+  .module('app')
+  .controller('authenticationController', [
+    '$scope',
+    '$location',
+    'gmailService',
+    function ($scope, $location, gmailService) {
+      $scope.init = () => {
+        $location.path('/labels')
       }
+
+      $scope.login = () => gmailService.authenticate()
+
+      $scope.init()
     }
+  ])
+  .service('authService', [
+    '$rootScope',
+    '$window',
+    '$cookies',
+    '$http',
+    function ($rootScope, $window, $cookies, $http) {
+      let loggedIn = false
+      let jwt
 
-    this.isLoggedIn = () => loggedIn
+      this.setup = () => {
+        $rootScope.globals = $rootScope.globals || {}
+        $rootScope.globals.jwt = $cookies.get('jwt')
 
-    this.setCredentials = _jwt => {
-      jwt = _jwt
-      loggedIn = true
-    }
+        // Set jwt in global if available
+        if ($rootScope.globals.jwt) {
+          $http.defaults.headers.common[
+            'Authorization'
+          ] = `Bearer ${$rootScope.globals.jwt}`
+          this.setCredentials($rootScope.globals.jwt)
+        }
+      }
 
-    this.getCredentials = () => jwt
+      this.isLoggedIn = () => loggedIn
 
-    $rootScope.$on('state:update', (event, { type, status }) => {
-      if (type === 'auth' && status === 'success') {
+      this.setCredentials = (_jwt) => {
+        jwt = _jwt
         loggedIn = true
-        this.setup()
-        $window.location.assign('#!/labels')
       }
-    })
 
-    $rootScope.$on('logout', function () {
-      loggedIn = false
-      $cookies.remove('jwt')
-      $window.location.assign('/')
-    })
-  }])
+      this.getCredentials = () => jwt
+
+      $rootScope.$on('state:update', (event, { type, status }) => {
+        if (type === 'auth' && status === 'success') {
+          loggedIn = true
+          this.setup()
+          $window.location.assign('#!/labels')
+        }
+      })
+
+      $rootScope.$on('logout', () => {
+        loggedIn = false
+        $cookies.remove('jwt')
+        $window.location.assign('/')
+      })
+    }
+  ])

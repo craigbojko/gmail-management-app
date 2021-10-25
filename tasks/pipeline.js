@@ -43,7 +43,7 @@ var cssFilesToInject = [
   // in no particular order.  To customize the ordering, add additional
   // items here, _above_ this one.
   'styles/**/*.css'
-];
+]
 
 
 //   ██████╗██╗     ██╗███████╗███╗   ██╗████████╗   ███████╗██╗██████╗ ███████╗
@@ -63,31 +63,36 @@ var cssFilesToInject = [
 // Client-side javascript files to inject as <script> tags, in order.
 //
 var jsFilesToInject = [
+  // // Bring in `.js` files for any other client-side JavaScript dependencies.
+  // // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
+  // // > Be sure to list dependencies that depend on each other in the right order!
 
   // Load `sails.io` before everything else.
-  'dependencies/sails.io.js',
+  '/dependencies/sails.io.js',
 
-  // AngularJS ordering
-  'dependencies/angular/angular.min.js',
-  'dependencies/angular-route/angular-route.min.js',
-  'dependencies/angular-cookies/angular-cookies.min.js',
-  'dependencies/angular-aria/angular-aria.min.js',
-  'dependencies/angular-animate/angular-animate.min.js',
-  'dependencies/angular-messages/angular-messages.min.js',
-  'dependencies/angular-material/angular-material.min.js',
-  'dependencies/angular-material-data-table/dist/md-data-table.min.js',
-
-  // Bring in `.js` files for any other client-side JavaScript dependencies.
-  // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
-  // > Be sure to list dependencies that depend on each other in the right order!
+  // // AngularJS ordering
+  '/dependencies/angular/angular.min.js',
+  '/dependencies/angular-route/angular-route.min.js',
+  '/dependencies/angular-cookies/angular-cookies.min.js',
+  '/dependencies/angular-aria/angular-aria.min.js',
+  '/dependencies/angular-animate/angular-animate.min.js',
+  '/dependencies/angular-messages/angular-messages.min.js',
+  '/dependencies/angular-material/angular-material.min.js',
+  '/dependencies/angular-material-data-table/dist/md-data-table.min.js',
   'dependencies/**/*.js',
 
+  // Main
   '/js/app/index.js',
 
-  // All of the rest of your custom client-side js files will be injected here,
-  // in no particular order.  To customize the ordering, add additional items
-  // here, _above_ this one.
-  'js/**/*.js'
+  // Controllers
+  '/js/app/controllers/auth.controller.js',
+  '/js/app/controllers/header.controller.js',
+  '/js/app/controllers/labels.controller.js',
+
+  // // All of the rest of your custom client-side js files will be injected here,
+  // // in no particular order.  To customize the ordering, add additional items
+  // // here, _above_ this one.
+  'js/**/*.js',
 ]
 
 //   ██████╗██╗     ██╗███████╗███╗   ██╗████████╗   ███████╗██╗██████╗ ███████╗

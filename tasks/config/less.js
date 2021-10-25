@@ -9,19 +9,20 @@
  *   https://sailsjs.com/anatomy/tasks/config/less.js
  *
  */
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
   grunt.config.set('less', {
     dev: {
-      files: [{
-        expand: true,
-        cwd: 'assets/styles/',
-        src: ['*.less'],
-        dest: '.tmp/public/styles/',
-        ext: '.css'
-      }]
+      files: [
+        {
+          expand: true,
+          cwd: 'assets/styles/',
+          src: ['*.less'],
+          dest: '.tmp/public/styles/',
+          ext: '.css'
+        }
+      ]
     }
-  });
+  })
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // This Grunt plugin is part of the default asset pipeline in Sails,
@@ -46,5 +47,4 @@ module.exports = function(grunt) {
   // grunt.loadNpmTasks('grunt-contrib-less');
   // ```
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-};
+}
