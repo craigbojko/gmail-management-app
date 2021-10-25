@@ -1,90 +1,50 @@
 /**
- * Default model settings
- * (sails.config.models)
- *
- * Your default, project-wide model settings. Can also be overridden on a
- * per-model basis by setting a top-level properties in the model definition.
- *
- * For details about all available model settings, see:
- * https://sailsjs.com/config/models
- *
- * For more general background on Sails model settings, and how to configure
- * them on a project-wide or per-model basis, see:
- * https://sailsjs.com/docs/concepts/models-and-orm/model-settings
+ * THIS FILE WAS ADDED AUTOMATICALLY by the Sails 1.0 app migration tool.
+ * IT SHOULD BE MERGED into your existing config/models.js file as soon as possible.
  */
 
 module.exports.models = {
 
+  // These settings make the .update(), .create() and .createEach()
+  // work like they did in 0.12, by returning records in the callback.
+  // This is pretty ineffecient, so if you don't _always_ need this feature, you
+  // should turn these off and instead chain `.meta({fetch: true})` onto the
+  // individual calls where you _do_ need records returned.
+  fetchRecordsOnUpdate: true,
+  fetchRecordsOnCreate: true,
+  fetchRecordsOnCreateEach: true,
 
-  /***************************************************************************
-  *                                                                          *
-  * Whether model methods like `.create()` and `.update()` should ignore     *
-  * (and refuse to persist) unrecognized data-- i.e. properties other than   *
-  * those explicitly defined by attributes in the model definition.          *
-  *                                                                          *
-  * To ease future maintenance of your code base, it is usually a good idea  *
-  * to set this to `true`.                                                   *
-  *                                                                          *
-  * > Note that `schema: false` is not supported by every database.          *
-  * > For example, if you are using a SQL database, then relevant models     *
-  * > are always effectively `schema: true`.  And if no `schema` setting is  *
-  * > provided whatsoever, the behavior is left up to the database adapter.  *
-  * >                                                                        *
-  * > For more info, see:                                                    *
-  * > https://sailsjs.com/docs/concepts/orm/model-settings#?schema           *
-  *                                                                          *
-  ***************************************************************************/
+  // Fetching records on destroy was experimental, but if you were using it,
+  // uncomment the next line.
+  // fetchRecordsOnDestroy: true,
 
-  // schema: true,
+  // The former `connection` model setting is now `datastore`.  This sets the datastore
+  // that models will use, unless overridden directly in the model file in `api/models`.
+  // It defaults to a datastore called `default`, which (unless otherwise configured in
+  // the `config/datastores.js` file) uses the built-in `sails-disk` adapter.
+  datastore: 'default',
 
+  // Because you can't have the old `connection` setting at the same time as the new
+  // `datastore` setting, we'll set it to `null` here.  When you merge this file into your
+  // existing `config/models.js` file, just remove any reference to `connection`.
+  connection: null,
 
-  /***************************************************************************
-  *                                                                          *
-  * How and whether Sails will attempt to automatically rebuild the          *
-  * tables/collections/etc. in your schema.                                  *
-  *                                                                          *
-  * > Note that, when running in a production environment, this will be      *
-  * > automatically set to `migrate: 'safe'`, no matter what you configure   *
-  * > here.  This is a failsafe to prevent Sails from accidentally running   *
-  * > auto-migrations on your production database.                           *
-  * >                                                                        *
-  * > For more info, see:                                                    *
-  * > https://sailsjs.com/docs/concepts/orm/model-settings#?migrate          *
-  *                                                                          *
-  ***************************************************************************/
-
-  // migrate: 'alter',
-
-
-  /***************************************************************************
-  *                                                                          *
-  * Base attributes that are included in all of your models by default.      *
-  * By convention, this is your primary key attribute (`id`), as well as two *
-  * other timestamp attributes for tracking when records were last created   *
-  * or updated.                                                              *
-  *                                                                          *
-  * > For more info, see:                                                    *
-  * > https://sailsjs.com/docs/concepts/orm/model-settings#?attributes       *
-  *                                                                          *
-  ***************************************************************************/
-
+  // These attributes will be added to all of your models.  When you create a new Sails 1.0
+  // app with "sails new", a similar configuration will be generated for you.
   attributes: {
-    createdAt: { type: 'number', autoCreatedAt: true, },
-    updatedAt: { type: 'number', autoUpdatedAt: true, },
-    id: { type: 'number', autoIncrement: true, },
-    //--------------------------------------------------------------------------
-    //  /\   Using MongoDB?
-    //  ||   Replace `id` above with this instead:
-    //
-    // ```
-    // id: { type: 'string', columnName: '_id' },
-    // ```
-    //
-    // Plus, don't forget to configure MongoDB as your default datastore:
-    // https://sailsjs.com/docs/tutorials/using-mongo-db
-    //--------------------------------------------------------------------------
+    // In Sails 1.0, the `autoCreatedAt` and `autoUpdatedAt` model settings
+    // have been removed.  Instead, you choose which attributes (if any) to use as
+    // timestamps.  By default, "sails new" will generate these two attributes as numbers,
+    // giving you the most flexibility.  But for compatibility with your existing project,
+    // we'll define them as strings.
+    createdAt: { type: 'string', autoCreatedAt: true, },
+    updatedAt: { type: 'string', autoUpdatedAt: true, },
+    // In Sails 1.0, the primary key field is no longer created for you, and `autoPK` is
+    // not a valid model option.  Instead, you define it yourself and tell Sails which
+    // attribute to use as the primary key by setting the `primaryKey` setting on the model.
+    // That setting defaults to `id`.
+    id: { type: 'number', autoIncrement: true, }
   },
-
 
   /******************************************************************************
   *                                                                             *
@@ -99,26 +59,8 @@ module.exports.models = {
   * > https://sailsjs.com/docs/concepts/orm/model-settings#?dataEncryptionKeys  *
   *                                                                             *
   ******************************************************************************/
-
   dataEncryptionKeys: {
-    default: 'KzwNqPagI49TVGje7opBGWlNCF2djCI15y+CBACP0fg='
+    default: 'nHsdfDe8fSL4iCKe1KVfnD4d3DA8MBhiCKOAsf59588='
   },
-
-
-  /***************************************************************************
-  *                                                                          *
-  * Whether or not implicit records for associations should be cleaned up    *
-  * automatically using the built-in polyfill.  This is especially useful    *
-  * during development with sails-disk.                                      *
-  *                                                                          *
-  * Depending on which databases you're using, you may want to disable this  *
-  * polyfill in your production environment.                                 *
-  *                                                                          *
-  * (For production configuration, see `config/env/production.js`.)          *
-  *                                                                          *
-  ***************************************************************************/
-
-  cascadeOnDestroy: true
-
 
 };
