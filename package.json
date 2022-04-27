@@ -18,7 +18,7 @@
     "csv-writer": "^1.6.0",
     "cypress": "^8.6.0",
     "googleapis": "^52.1.0",
-    "grunt": "^1.4.1",
+    "grunt": "^1.5.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "ramda": "^0.27.1",
