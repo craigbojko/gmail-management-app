@@ -26,7 +26,7 @@
     "sails-hook-autoreload": "^1.1.0",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sockets": "^2.0.1"
+    "sails-hook-sockets": "^2.0.3"
   },
   "devDependencies": {
     "@types/cypress": "^1.1.3",
